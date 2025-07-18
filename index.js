@@ -2,21 +2,22 @@ import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import { Router } from "express";
+import route from './routes/userRoutes.js'
+
 
 const app = express();
-
 app.use(bodyParser.json());
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const MONGOURL = process.env.MONGO_URL;
 
-//mongodb connection
-mongoose.connect(MONGOURL).then(() => {
-  console.log("Mongodb Connected Successfully");
-  app.listen(PORT, () => {
-    console.log(`server is running on port ${PORT}`);
+// MongoDB connectionz
+mongoose.connect(MONGOURL)
+  .then(() => {
+    console.log("MongoDB connected successfully");
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    })
   })
-}).catch((err)=>{
-   console.log(err)
-})
+  .catch((err) => console.log("DB error:", err));
+app.use("/api/user", route); 
