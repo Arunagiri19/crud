@@ -21,6 +21,7 @@ export const create = async (req, res) => {
 }
 
 
+//get user logic
 export const get = async (req, res) => {
     try {
         const users = await user.find();
